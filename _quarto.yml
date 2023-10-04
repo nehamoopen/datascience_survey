@@ -1,0 +1,9 @@
+project:
+  title: "LIBER DSLib Survey"
+  output-dir: docs
+
+format:
+  html:
+    theme: cosmo
+
+

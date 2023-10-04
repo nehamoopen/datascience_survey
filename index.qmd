@@ -1,0 +1,102 @@
+---
+title: "LIBER DSLib Survey"
+---
+
+The LIBER Data Science in Libraries (DSLib) working group explores and promotes library engagement in applying data science and analytical methods in libraries, taking into account all kinds of processes and workflows around library collections and metadata as well as digital infrastructures and service areas.
+
+```{python}
+from QualtricsAPI.Setup import Credentials
+from QualtricsAPI.Survey import Responses
+import pandas as pd
+from collections import Counter
+import matplotlib.pyplot as plt
+import seaborn as sns   
+from IPython.core.display import HTML
+from collections import Counter
+import re
+```
+
+```{python}
+# Load Qualtrics credentials from file
+with open('C:/Users/Moope001/.auth/qualtrics-key.txt', 'r') as f:
+     key_contents = f.read().strip()
+```
+
+```{python}
+
+api_token = key_contents.split('\n')[0].split('=')[1]
+data_center = key_contents.split('\n')[1].split('=')[1]
+
+# Authenticate with Qualtrics API
+Credentials().qualtrics_api_credentials(token=api_token, data_center=data_center)
+```
+
+```{python}
+# Load survey ID and name from file
+with open('config/survey.txt', 'r') as f:
+    survey_contents = f.read().strip()
+
+survey_name, survey_id = survey_contents.split(',')
+
+# Retrieve survey responses and save to CSV file
+survey = Responses().get_survey_responses(survey=survey_id)
+survey.to_csv('data/datascience_survey.csv')
+```
+
+
+```{python}
+def bar_chart(question_nr,width=5,height=10):
+    responses = survey[question_nr].dropna().tolist()
+    counts = Counter(responses)
+    y_axis = list(counts.keys())
+    x_axis = list(counts.values())
+
+    sns.set(rc={'figure.figsize':(width,height)})
+
+    sns.barplot( x=x_axis, 
+                y=y_axis , 
+               color = '#fcba03' )
+    plt.show()
+    
+def print_responses(question_nr):
+    responses = survey[question_nr]
+    for i,response in enumerate(responses):
+        if not pd.isna(response):
+            print(f"{i+2}. {response}")
+            print('----------')
+```
+
+
+```{python}
+# first two rows contain column names and data types
+questions = survey.iloc[0]
+survey = survey.iloc[2:]
+```
+
+## Response
+
+
+```{python}
+print( f'There are {survey.shape[0]} responses')
+```
+
+```{python}
+survey['date']= pd.to_datetime(survey['StartDate'])
+```
+
+
+```{python}
+print(f"The surveys have been completed in between {survey['date'].min().strftime('%Y-%m-%d')} and {survey['date'].max().strftime('%Y-%m-%d')}")
+```
+
+The surveys have not been filled out completely in all cases.
+
+
+```{python}
+progress = survey.groupby('Progress')['ResponseId'].count()
+progress_dict = progress.to_dict()
+# Convert string keys to integers
+progress_dict = {int(k):int(v) for k,v in progress_dict.items()}
+for percentage in sorted(progress_dict):
+    print(f'{percentage}% : {progress_dict[percentage]}')
+```
