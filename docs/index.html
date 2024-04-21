@@ -71,15 +71,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#response" id="toc-response" class="nav-link" data-scroll-target="#response">Response</a></li>
+  <li><a href="#job-title" id="toc-job-title" class="nav-link" data-scroll-target="#job-title">Job Title</a></li>
+  <li><a href="#institutions" id="toc-institutions" class="nav-link" data-scroll-target="#institutions">Institutions</a></li>
+  <li><a href="#data-science-activities" id="toc-data-science-activities" class="nav-link" data-scroll-target="#data-science-activities">Data Science Activities</a></li>
+  <li><a href="#library-intelligence" id="toc-library-intelligence" class="nav-link" data-scroll-target="#library-intelligence">Library Intelligence</a></li>
+  <li><a href="#tasks-responsibilities-of-library-staff-working-with-data-science" id="toc-tasks-responsibilities-of-library-staff-working-with-data-science" class="nav-link" data-scroll-target="#tasks-responsibilities-of-library-staff-working-with-data-science">Tasks &amp; Responsibilities of library staff working with data science</a></li>
+  <li><a href="#challenges" id="toc-challenges" class="nav-link" data-scroll-target="#challenges">Challenges</a>
+  <ul class="collapse">
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  <li><a href="#funding" id="toc-funding" class="nav-link" data-scroll-target="#funding">Funding</a>
+  <ul class="collapse">
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
+  </ul></li>
+  <li><a href="#ambitions" id="toc-ambitions" class="nav-link" data-scroll-target="#ambitions">Ambitions</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">LIBER DSLib Survey</h1>
+<div class="quarto-title-block"><div><h1 class="title">LIBER DSLib Survey</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -94,108 +117,843 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>The LIBER Data Science in Libraries (DSLib) working group explores and promotes library engagement in applying data science and analytical methods in libraries, taking into account all kinds of processes and workflows around library collections and metadata as well as digital infrastructures and service areas.</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> QualtricsAPI.Setup <span class="im">import</span> Credentials</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> QualtricsAPI.Survey <span class="im">import</span> Responses</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns   </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Qualtrics credentials from file</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'C:/Users/Moope001/.auth/qualtrics-key.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     key_contents <span class="op">=</span> f.read().strip()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>api_token <span class="op">=</span> key_contents.split(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)[<span class="dv">0</span>].split(<span class="st">'='</span>)[<span class="dv">1</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_center <span class="op">=</span> key_contents.split(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)[<span class="dv">1</span>].split(<span class="st">'='</span>)[<span class="dv">1</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Authenticate with Qualtrics API</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Credentials().qualtrics_api_credentials(token<span class="op">=</span>api_token, data_center<span class="op">=</span>data_center)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load survey ID and name from file</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'config/survey.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    survey_contents <span class="op">=</span> f.read().strip()</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>survey_name, survey_id <span class="op">=</span> survey_contents.split(<span class="st">','</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve survey responses and save to CSV file</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> Responses().get_survey_responses(survey<span class="op">=</span>survey_id)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>survey.to_csv(<span class="st">'data/datascience_survey.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bar_chart(question_nr,width<span class="op">=</span><span class="dv">5</span>,height<span class="op">=</span><span class="dv">10</span>):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    responses <span class="op">=</span> survey[question_nr].dropna().tolist()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> Counter(responses)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    y_axis <span class="op">=</span> <span class="bu">list</span>(counts.keys())</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    x_axis <span class="op">=</span> <span class="bu">list</span>(counts.values())</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    sns.<span class="bu">set</span>(rc<span class="op">=</span>{<span class="st">'figure.figsize'</span>:(width,height)})</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    sns.barplot( x<span class="op">=</span>x_axis, </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>y_axis , </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>               color <span class="op">=</span> <span class="st">'#fcba03'</span> )</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_responses(question_nr):</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    responses <span class="op">=</span> survey[question_nr]</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,response <span class="kw">in</span> <span class="bu">enumerate</span>(responses):</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> pd.isna(response):</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">2</span><span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'----------'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first two rows contain column names and data types</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>questions <span class="op">=</span> survey.iloc[<span class="dv">0</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.iloc[<span class="dv">2</span>:]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
 <section id="response" class="level2">
 <h2 class="anchored" data-anchor-id="response">Response</h2>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f'There are </span><span class="sc">{</span>survey<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> responses'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>There are 105 responses</code></pre>
+<pre><code>There are 109 responses</code></pre>
 </div>
-</div>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'date'</span>]<span class="op">=</span> pd.to_datetime(survey[<span class="st">'StartDate'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The surveys have been completed in between </span><span class="sc">{</span>survey[<span class="st">'date'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">.</span>strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>survey[<span class="st">'date'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">.</span>strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The surveys have been completed in between 2022-12-02 and 2023-08-25</code></pre>
+<pre><code>The surveys have been completed in between 2022-12-02 and 2023-11-27</code></pre>
 </div>
 </div>
 <p>The surveys have not been filled out completely in all cases.</p>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>progress <span class="op">=</span> survey.groupby(<span class="st">'Progress'</span>)[<span class="st">'ResponseId'</span>].count()</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>progress_dict <span class="op">=</span> progress.to_dict()</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert string keys to integers</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>progress_dict <span class="op">=</span> {<span class="bu">int</span>(k):<span class="bu">int</span>(v) <span class="cf">for</span> k,v <span class="kw">in</span> progress_dict.items()}</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> percentage <span class="kw">in</span> <span class="bu">sorted</span>(progress_dict):</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>percentage<span class="sc">}</span><span class="ss">% : </span><span class="sc">{</span>progress_dict[percentage]<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0% : 7
-5% : 17
+5% : 18
 10% : 19
 25% : 4
 30% : 16
-40% : 4
-45% : 5
+40% : 5
+45% : 6
 60% : 6
-70% : 4
+70% : 5
 80% : 3
 85% : 1
 95% : 2
 100% : 17</code></pre>
 </div>
 </div>
+</section>
+<section id="job-title" class="level2">
+<h2 class="anchored" data-anchor-id="job-title">Job Title</h2>
+<div class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="335">
+<pre><code>'What is your job title?'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-13-output-1.png" width="800" height="785"></p>
+</div>
+</div>
+</section>
+<section id="institutions" class="level2">
+<h2 class="anchored" data-anchor-id="institutions">Institutions</h2>
+<div class="cell" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="337">
+<pre><code>'Which library are you affiliated with?'</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-15-output-1.png" width="980" height="785"></p>
+</div>
+</div>
+</section>
+<section id="data-science-activities" class="level2">
+<h2 class="anchored" data-anchor-id="data-science-activities">Data Science Activities</h2>
+<p>Respondents appear to agree with the overview of data science activties. There was only one suggestion for a new category.</p>
+<div class="cell" data-execution_count="19">
+<div class="cell-output cell-output-stdout">
+<pre><code>Student support
+New category: "education support"?</code></pre>
+</div>
+</div>
+</section>
+<section id="library-intelligence" class="level2">
+<h2 class="anchored" data-anchor-id="library-intelligence">Library Intelligence</h2>
+<div class="cell" data-execution_count="20">
+<div class="cell-output cell-output-stdout">
+<pre><code>Describe the current data science activities in your library.
+
+
+
+In your answers, you are invited to be as specific as possible. You are welcome to provide concrete use examples and data science methods.
+
+
+
+If you find it helpful, you may specify when your answers relate to one or more of the aforementioned categories or divide your answers based on the aforementioned categories:
+
+    Collections as Data
+    Library Intelligence
+    Research Support
+    Research Intelligence
+    Other</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Library Intelligence - support decision-making by library management. Use data from the service Unsub to make a first pass at journal renewal and cancellation decisions. Subject specialists also weigh in with their views.
+
+Research Intelligence - metadata of publications to understand where our faculty choose to publish. I construct a pie chart each year showing how our campus output breaks down by publisher share. How does this vary over time? Are certain publishers increasing or decreasing? This in turn is used to inform which publishers we approach or engage in negotiating Open Access agreements for our campus.
+----------
+3. Library Intelligence: Collection of statistics regarding user support, collections, facilities for planning, national library statistics, and annual reports.
+Research Support: Data management plans, collection of data, computational literature reviews.
+Research Intelligence: Bibliometric analyses.
+Student support: Courses in data analytics, courses in text mining.
+----------
+5. Services for research data management  
+
+The University Library and Knowledge Centre provides and offers various services to the research community in order to make research data as open as possible, in line with the University's strategic goals.  
+
+Our services and support take into account the recommendations of the University and research funders, as well as national and EU-level participants in open science and research. 
+
+Research Data Management Advisory Service 
+
+In line with the strategic goal of the library – to support the dissemination of academic research results, a research data management advisory service has been developed. For the proper management of research data, we provide individual consultations and group presentations for our researchers, academics and PhD students.  
+
+The University Library and Knowledge Centre provides assistance on general data management issues, including the following: FAIR data management; compliance of research data with FAIR principles; Data management tips; recommendation of free tools; How to put the research data management plan into practice; how to comply with calls for proposals; How to use the university’s Office 365 subscription in the research process; Options for archiving research data. 
+
+Data Management Plan Consultation 
+
+The data management plan has become a mandatory element in EU, as well as in national „OTKA” and „Élvonal” proposals. The University Library and Knowledge Centre assists researchers in preparing their data management plans specifically to comply with the proposals. 
+
+Archiving Research Data In Institutional Repository 
+
+We do not yet have a working research data repository. (We store some records separately in the publication repository. We do not have a contract with a DOI provider that can issue a permanent identifier for datasets.) 
+
+Help in Choosing the Right Data Repository 
+
+The University Library and Knowledge Centre tries to help to choose the right data repository based on the most relevant proposals, funding bodies and publishers. 
+
+Other activities for research data management 
+
+We try to keep up with trends in research data management, available tools, the expectations of the funding authorities, and the needs of individual researchers. As we do not have in-house developed services, we offer existing, reliable international services to interested researchers (for example OpenAIRE services) 
+
+We also created an online educational tutorial entitled „Introduction to Research Data Management.” 
+----------
+24. Research is supported by a research data consultant who gives advise on all aspects of handling research data. He supports the creation of data management plans, as well as the archiving and publishing of data. Furthermore, he answers all questions regarding research data management in third party (external) funding projects.
+----------
+28. Collections as Data
+----------
+30. # Collections as data
+
+- **experimental** partaking in a national project for automated cataloging
+- Involving the general public in geo-referencing of maps in our collection; using that data to improve map metadata.
+- **experimental** exploring the use of the Transkribus tool for automated transciption of manuscripts.
+- Making available the metadata (including images) of our art and heritage collections.
+
+# Library intelligence
+
+- the library plays an important role in the creation of metadata for the academic collections in the library itself, and for the output of the researchers. Where possible, the library tries to automate the acquisition of metadata by ingesting data from other providers.
+- **experimental** We are working on internal projects to publish our metadata collections (possibly linked, probably open), but these projects are still in a very early stage.
+- Working on ways to register different (non-traditional) types of academic output
+- **experimental** exploring possibilities to attribute PIDs to elements of metadata ourselves
+- **experimental** using data on usage and other criteria for semi-automated de-selection.
+- **experimental** using real time data on space occupancy in study spaces.
+
+# Research support
+
+- RDM support: the Research Data Management team in the university library suppors researchers to make their data FAIR. The team teaches group instructions for writing data management plans; organizes support sessions for individual researchers; and provides information on a website. The library is also heavily involved in a university-wide network for research data support that further includes the IT department and legal department.
+- community management: the library has invested in community management for the fields it tries to support. Most relevant for this survey, the library has roles for community management for the broader RDM community (inclusing researchers and support staff outside the library), and the open science community (involving also researcher and student advocacy groups for OS).
+- Research software management: the library has recently created a role for support for FAIR research software, analogue to the support for FAIR research data.
+- Library Carpentries, Software Carpentries, Code Refinery: the library organizes sessions to help fellow librarians, researchers, experienced programmers to improve their data and software skills.
+- Automating the process for systematic literature reviews
+
+# Research intelligence
+
+- The Research Intelligence team supports research groups and departments to gather and analyze their research impact. The analysis is often used to support strategic decisions of the departments. The RI team uses data on research output and citation analysis to quantify academic impact. Increasingly, departments want to learn about the impact of their research outside of academia. Responding to this demand, the RI team uses data of mentions in the social and professional media, and in policy work to create indictaors for this type of analysis. The output in the team is mostly in the form of inteactive dashboards.
+
+# Other (Education support)
+
+- Use of virtual reality in education
+- Using usage statistics to improve products and services (Libguides, data support, open eductaional resources)
+- **experimental** partaking in a national project on learning analytics.
+----------
+32. As we are aware of how important a clean database enriched with rich information for Data Science is, great emphasis is placed on data quality in the creation and ongoing maintenance of metadata. This includes:
+- Normalisation/disambiguation of persons and corporate bodies.
+- Linking between data sets
+- Enrichment of data sets with IDs (publications, persons, corporate bodies, thesauri)
+- Content indexing
+Actors are Cataloguing, indexing, metadata management and data quality management.
+
+Automated Subject Indexing (pertains to Collections as Data)
+- we use machine learning methods for the automation of subject indexing https://www.zbw.eu/en/about-us/key-activities/automation-subject-indexing 
+- the machine learning models are trained on the metadata for ZBW holdings (specifically titles and, if available, author keywords, perspectively also abstracts and tables of content; currently only for English)
+- we use the toolkit Annif (https://github.com/NatLibFi/Annif) as a framework and accompany it with our own models and components in order to run our productive service for automated subject indexing (AutoSE)
+
+Author Profiles 
+It is related to consumption rather than the generation of data (https://www.econbiz.de/eb/en/beta/econbiz-author-profiles). 
+- We rely on various data collections, such as EconBiz, GND, DBpedia, Wikidata, RePEc (CitEc), OpenCitations, OpenAlex, etc.
+- Retrieving/Using through RESP API, SPARQL Endpoints, and Dump files (RDF, JSON, CSV, etc).
+- Processing  through several NLP methods, and applying visualizations
+- Implementing ML i.e. Word Embeddings 
+
+Author Name Disambiguation
+- Co-authorship analyses, subject headings and titles are included too.
+- GND-ID applied as the main identifier
+
+ChatBot using Chat-logs
+
+Analyzing query logs of user queries in Econbiz
+
+----------
+33. Research support: 
+Datasets: Curation and Publication. Data Management Plan support.
+----------
+35. Collections as Data
+-The Data management team develops workflows to discover suitable enrichments of bibliographic records from different sources. Publications from all German library networks and the Austrian Library Network are aggregated under the platform Culturegraph. Works are clustered together in bundles to enable the transfer of metadata contents such as links to authority records for persons and elements of content description from other cluster members. 
+Matching processes with persistent identifiers, e.g. ORCiD or ISNI, allow for the enrichment of person authority records and title records with unique identifiers.
+
+-From 2019 on the German National Library conducted a project (EMa Erschließungsmaschine) with the aim of replacing its until then used system for automatic subject indexing. Several options were evaluated and the software package Annif was chosen as a replacement. After extensive testing and developing learning algorithms it is now used for automatic subject indexing and the automatic assignment of GND descriptors, DDC Subject Categories and DDC Short Numbers.
+
+-Project “Subject cataloguing with AI methods” funded by the German Minister of State for Culture and the Media explores and evaluates current AI developments and their potential to produce cataloguing data automatically (https://www.dnb.de/EN/Professionell/ProjekteKooperationen/Projekte/KI/KI.html ). 
+
+-Project “PID Network Germany – Network for the promotion of persistent identifiers in science and culture” funded by the German Research Foundation (DFG). The project aims to establish a national platform for expertise and networking on the topics of persistent identification of persons, organisations, publications, resources and infrastructures in the field of digital communication in science and culture. It is a cooperation of DNB with research libraries, DataCite and the Helmholtz Open Science Office.
+
+-GND Dashboard
+As a contribution to GNDcon2.0 2021 a visualization of authority file records (Integrated Authortity File (GND)) and statistical details was created (https://deutsche-nationalbibliothek-gnd-dashboa-dashboardgnd-app-zrznpr.streamlit.app/ )
+
+-The German Museum of Books and Writing (DBSM) conducts several data science activities on their holdings: 
+•   Text mining: Analyzing the content of digitized and OCRed holdings
+•   Image processing: Tests with AI methods for analyzing watermarks
+•   Statistics and visualization: Analyzing meta data and representing it (e.g. GND-Dashboard)
+
+Library intelligence
+For a few years an electronic tool has been used in different departments of the library to collect statistical data on internal workflows in the library, e.g. indexing (kind, depth), number of incoming legal deposits (print, online), duration of processing incoming media.
+Statistics of media orders in the reading room relating to time of orders and type of ordered medium were maintained manually until recently and frequency of visits and orders are analyzed as well.
+ 
+These data are published in the Annual Report. They also serve as a basis for internal planning e.g. concerning the allocation of work and staff, quality control, provision of support for selected tasks in the process. 
+Item suggestions in DNB´s catalogue are implemented via a commercial tool analyzing user behavior in the catalogue (bibtip). 
+
+Research support
+-With the Integrated Authority File (Gemeinsame Normdatei, GND) the German National Library and its partners provide a cross-cutting service useful to all Humanities and Social Sciences and offering central reference points and search entries with which to link information on cultural and research data. The GND is used as a tool for various Data Science activities and well established as an instrument in Linked Data context. In the GND explorer (https://explore.gnd.network/) GND entities and their relations complemented by various other information from different sources are presented in an interactive visualization.
+-Collaborations with researchers in individual projects where DNB provides selected metadata content or access to full texts on the premises (e.g. Children and Youth literature, dime novels)
+- Systematic approaches of a dedicated team to further the cooperation with researchers in the Digital Humanities employing different strategies as well as supporting projects with individual researchers approaching the library.
+-DNBLab (https://www.dnb.de/librarylab) offers several collections of freely available data, both metadata and full texts and is targeted at Digital Humanities researchers. It also offers tutorials and webinars to teach data analysis techniques.
+-DNB offers a yearly DH call (https://www.dnb.de/dhecall). Applicants can obtain access to DNB data and infrastructures to work on Digital Humanities projects focusing on DNB content.
+-A DH Fellowship is awarded each year since 2022 for a period up to 3-6 months (https://www.dnb.de/dhfellowship). Researchers can work with DNB´s metadata and receive a funding. 
+- Participation in NFDI4Culture - Consortium for Research Data on Material and Immaterial Cultural Heritage funded under the German National Research Data Infrastructure (NFDI) framework. The consortium focuses on creating an infrastructure to preserve research data of material and non-material cultural heritage from research desciplines such as amongst others musicology, art history or theatre.
+- Participation in Text+ funded under the German National Research Data Infrastructure (NFDI) framework. The consortium, comprising more than 30 partners, aims to preserve text-and language-based research data for the long term and to facilitate its widespread utilisation in academia. The German National Library is contributing open access information such as metadata and digitised tables of contents to the Text+ data corpus besides providing new opportunities for academics to work with its digital collections using the text and data mining possibilities authorised by law.
+Endeavour to harvest the German-language part of Twitter in cooperation with different researchers.
+----------
+37. Library collection using Artificial intelligence to improve quality in research method.
+----------
+38. Research Support
+Guides, resources, advisory and training about RDM and FAIRness, data curation through our institutional data repository, advisory in  systematic searches and reviews of literature.
+Research Intelligence
+Bibliometric analysis for departaments, research groups and individuals. Automated document uploads to CRIS
+----------
+47. c
+----------
+51. Collections as Data
+Negotiate rights for TDM in commercial products
+Provide access to DH/TDM tools as part of larger packages (eg Gale Scholar Lab)
+
+Library Intelligence
+Acquisitions and renewal decisions are informed by usage data (COUNTER stats, loan statistics, Leganto stats)
+Evidence based acquisition (although we are much more demand/patron driven in models)
+We undertake collections analysis eg to identify items for the operational collection or items to withdraw/relegate
+Assessing impact of cancellations with Unsub
+[We are a bit basic with all of these things and have aspirations to do more]
+
+Library Data Hub Perspective
+Descriptive analysis of workflows eg Requests / Collection Management / Reading lists / Resolver / Star Plus 
+Creation and availability of automated interactive Dashboards.
+Collation of key industry statistics includes, benchmarking analysis of selected institutions in key business areas
+Trend analysis
+Regular reporting of key statistics to help form Library Strategy 
+
+Research support
+Data management plan guidance, templates, and feedback.
+Research Software Engineering (RSE) (based in IT Services) team have code clinics and can be contacted to discuss any projects they could be a part of, as well as training and other guidance.
+Upcoming guidance around FAIR principles, workshops and further bespoke departmental checklists - ongoing work.
+Data curation: Guidance on governance and defining your data to ensure correct collection/creation, and best practice around file formats etc..
+Data preservation: Help detailing storage plans (via a DMP), signposting to correct service dependent on data, ORDA (or other data/subject specific repositories at end of project).
+Use of data science methods: RSE do help with code clinics, carpentry, and potential collaboration.
+Guidance on licensing code and other research outputs.
+----------
+60. Activities related to Collections as Data:
+
+* MINE is a collaborated project between the SUB and GWDG with the goal to offer a convenient platform for text analysis. Available via:  https://mine-graph.de/. MINE is a service to offer access to various text resources and their extracted knowledge. Additionally, it also offers a workspace for users to run their analytics workflows. The aims of MINE are to offer an easy access to text resources at Göttingen Campus, or resources from partners from all over the world. MINE does not only allow searching for the already existing data and meta-data, but also enriches the meta-data with pre-executed TDM tools. The results of these tools are stored in a knowledge graph which gives new and unique ways to examine the available resources. The service is currently under development and is a joined project between the Niedersächsische Staats- und Universitätsbibliothek Göttingen (SUB) and the Gesellschaft für wissenschaftliche Datenverarbeitung Göttingen (GWDG). The technical infrastructure under development will constantly be extended with new tools and more text resources.
+
+* Skills for working with data - targeting both librarians and researchers
+    * Carpentries working group, https://pad.gwdg.de/GOECarpentries# 
+    * Book club on Data Science (reading Wickham &amp; Grolemund, R for Data Science, https://r4ds.had.co.nz/)
+    * Teaching a TDM session at Humboldt University, https://github.com/njahn82/ibi_austen 
+
+* UN SDGs mining project: Identification of UN sustainability goals in research publications (R&amp;D Department at SUBn Göttingen): 
+      In 2015, the United Nations Member States (UN) agreed on 17 sustainable development goals (SDG) „for peace and prosperity for people and the planet, now and into the future“.
+      An SUB research group wants to support this endeavour by cluster research publications, based on their relevance to these SDGs. The goal is to make relevant research findable and also to strengthen access and visibility to such research.
+      A combination of approaches is necessary to deal with diverse challenges. First, texts must be prepared for processing. Since research publications are written in different formats, styles, semantics and even languages, this is where the first challenge begins. Policies must also be considered. A variety of licenses and conditions have to be considered. Once this is done, the content of the texts can be analyzed. A variety of methods are available for this purpose: A combination of text and data mining, topic modelling and linguistic analysis is necessary to cope with the challenges of heterogeneity of texts, different semantics and large data sets.
+      The group aims to compare several methods applied to a corpus that is ready for take-off.
+
+* TextAPI (https://textapi.com/): putting the power of natural language processing into the hands of the everyday computer programmer or industrious business owner. It is surfacing this power to do text analysis, extraction, and manipulation via a language agnostic web API. This allows a developer of any walk of life whether it be PHP or C# to be able to leverage this potential.
+
+* The Text+ consortium (https://www.text-plus.org/en/home/) will preserve text- and language-based research data in the long term and enable their broad use in science. The research data initially addressed by Text+ is divided into three domains: Digital Collections, Lexical Resources and Editions, as they have a long tradition in humanities research. They are linked to established methodological paradigms that require distinctive, yet cross-cutting practices of data creation, use, analysis, networking and curation. They are indispensable for a wide range of disciplines including, but not limited to, linguistics, literary studies, philologies including the so-called ‘small disciplines’, philosophy, and language and text-based research in the social and political sciences. 
+
+
+Activities related to Library Intelligence:
+
+*  Statistics about the proportion of OA publications in order to influence OA policies and collections management (also related to "Research Analytics").
+*  SSHOC (Social Sciences and Humanities for the European Open Science Cloud, https://sshopencloud.eu/, an EU-funded project): building a publication network pipeline as addition to an existing metadata extraction framework
+* Digital Geochemistry Infrastructure (DIGIS, https://www.uni-goettingen.de/de/digital+geochemistry+infrastructure/643369.html): extracting information from research papers for a geochemical database
+* Culture Cloud: detection of cross reference between objects in collections at campus Göttingen (prototype for a proposal)
+* OCR-D (https://ocr-d.de/) projects (OCR-D Coordination, OLAHD, OPERANDI) to provide the requirements for data science activities on digitized books.
+* Text+ (https://www.text-plus.org/en/home/), national research data infrastructure for language- and text-based research: several different TDM related tasks
+* QA catalogue: quality assessment of MARC21 library catalogue to analyse metadata records and point out issues. Used in 3 libraries (U Gent, British Library, Belgian national library) to run an analysis on a regular basis (e.g. weekly) and fix the issues (https://github.com/pkiraly/metadata-qa-marc/)
+* Metadata Quality Assessment Framework API: a genric tool to assess metadata quality. It is used in Europeana, German Digital Library, Victoria and Albert Museum, meemoo (Flemish audiovisual archive) (https://github.com/pkiraly/metadata-qa-api/)
+
+Activities related to Research Support:
+* GeoMapper (https://geomapper.goettingen-research-online.de/, repository: https://gitlab.gwdg.de/era-public/dataverse-mapper/), developed by the SUB R&amp;D department
+* Dataverse built-in tools (e.g. Data Explorer (https://scholarsportal.github.io/Dataverse-Data-Explorer/))
+* Other research group specific data repositories: e.g. TextGrid (Digital Humanities), FOR 2432 (agriculture), Bexis (biodiversity), DIGIS (geochemistry)
+* Tools developed in the context of third-party funded projects (e.g. GeoMapper); infrastructure development, application of built-in functionalities and tools (e.g. data repositories) as listed above. 
+
+Activities related to Research Intelligence:
+
+ * Analysis of big scholarly data, reports and visualisation (e.g. interactive reports, dashboards)
+    * Open Access Uptake in Germany https://subugoe.github.io/oauni/
+    * Measuring Hybrid Open Access Uptake using open scholarly data sources (in progress, Data R package https://subugoe.github.io/hoaddata/)
+    * metacheck, a self-assessment tool for open schoalrly data build implemented as a R package https://subugoe.github.io/metacheck/ 
+    * Scholarly Communication Analytics blog, https://subugoe.github.io/scholcomm_analytics/
+
+*  Skills for working with data - targeting both librarians and researchers
+    * Carpentries working group (https://pad.gwdg.de/GOECarpentries#), acrosss various SUB units, GWDG and university faculty; contribution the Carpentries community (e.g. member in Library Carpentry Advisory Group; maintainer role for LC lesson)
+    * Book club on Data Science
+    * Short course on bibliometrics / digital science at Humboldt University for post-graduate LIS students  ([Slides](https://docs.google.com/presentation/d/1D-lEnMtgKSqhQUZzxgAa3kiQaYW8H0rVOkbZkO7VYmw/edit#slide=id.p)) 
+    * Session on reproducible research at Göttingen Open Science Meet-up, Oct 2020 
+        
+* Other studies
+    * Contribution to a study on publishing reproducible research outcomes (via Knowledge Exchange Open Access Expert Group, https://doi.org/10.5281/zenodo.5521077)
+    * ON-MERRIT (EU project): Patent analysis on open access in innovation
+
+* Research publications since 2020, e.g. 
+    * Fraser, N., Hobert, A., Jahn, N., Mayr, P., &amp; Peters, I. (2023). No deal: German researchers’ publishing and citing behaviors after Big Deal negotiations with Elsevier. Quantitative Science Studies, 1–28. https://doi.org/10.1162/qss_a_00255
+    * Jahn , N. , Laakso , M. , Lazzeri , E. &amp; McQuilton , P. (2023). Study on the readiness of research data and literature repositories to facilitate compliance with the Open Science Horizon Europe MGA requirements : Final report. European commission, Brussels. https://doi.org/10.5281/zenodo.7728016
+    *   Jahn, N., Matthias, L., &amp; Laakso, M. (2022). Toward transparency of hybrid open access through publisher‐provided metadata: An article‐level study of Elsevier. *Journal of the Association for Information Science and Technology*, 73(1), 104–118. https://doi.org/10.1002/asi.24549
+    *   Hobert, A., Jahn, N., Mayr, P., Schmidt, B., &amp; Taubert, N. (2021). Open access uptake in Germany 2010–2018: adoption in a diverse research landscape. *Scientometrics*, 126(12), 9751–9777. https://doi.org/10.1007/s11192-021-04002-0
+    *   Laakso, M., Matthias, L., &amp; Jahn, N. (2021). Open is not forever: A study of vanished open access journals. *Journal of the Association for Information Science and Technology*, 72(9), 1099–1112. https://doi.org/10.1002/asi.24460
+----------
+94. We have a digital humanities project designed to help researchers take library digital collections and use them in their research (collections as data). We also teach programming languages, machine learning, statistics, data management and other workshops and offer 1:1 consultations to our research community (research support).
+----------
+105. Collections as Data - National Library of Serbia is on the way towards completely searchable digital library, so we are working on the extraction of the full text out of digitised textual docs, like books, newspapers, journals... Our platform for digital library is still not supporting the full text search and it should be approved in the future. 
+
+Research Support - National Library of Serbia is one of 40 trusted partners of Europeana, as the National Aggregator for Europeana, so we applied Linked Open Data in the datasets to be published on Europeana. Our platform for digital library is still not supporting LOD and we would like to change it. 
+----------
+106. Automated subject indexing on bibliographic records of resources writtent in French using the French controlled vocabulary Rameau
+Named entity recognition on newspapers written in French
+----------</code></pre>
+</div>
+</div>
+</section>
+<section id="tasks-responsibilities-of-library-staff-working-with-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="tasks-responsibilities-of-library-staff-working-with-data-science">Tasks &amp; Responsibilities of library staff working with data science</h2>
+<div class="cell" data-execution_count="22">
+<div class="cell-output cell-output-stdout">
+<pre><code>Which department(s), team(s), or similar entities carry out data science activities in your library?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="23">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Mostly just me. My position is split half liaison librarian, half collection analysis. I support our Collection Development Management Team with data to help make decisions.
+----------
+3. The activities are spread over several library units.
+----------
+5. Department of Publication and Research Assistance
+----------
+24. The department is called "Research Support Services".
+----------
+28. Medicine
+----------
+30. Data science activities are carried oiut in all departments, but are concentrated in the departments for Research Support and for Digital infrastructure
+----------
+31. Research Support Unit
+----------
+32. Academic Services; User Services; Information Provision &amp; Access; Digital Economics Innovative; Information Systems &amp; Publishing Technologies
+----------
+33. The teaching and research support manager
+----------
+35. '-  Collections as data Data management team (part of IT department) Department for Automatic Indexing Online Publications Researchers at German Museum for Books and Writing (DBSM, part of DNB) Project team “Subject cataloguing with AI methods”  Project team on NFDI4Culture Project team on Text+ Project team on PID -Research support Department for Digital Services (Digitale Dienste) hosts DNBLab with freely available text and data collections and tutorials for data analysis and takes care of DH-related activities -Library intelligence Librarians in different departments of the library, e.g. Acquisition and Cataloguing
+----------
+36. Depending on the activity, teams vary
+----------
+37. Research and administration department
+----------
+38. The deputy directors' unit and a cross-cutting working group.
+----------
+39. Business Administration, Computer Science, Economics
+----------
+51. Scholarly Communications Team, RSE, Content &amp; Collections, Library Business Services, TSS, Library Digital Services, Faculty Engagement Team
+----------
+60. Depending on projects and actual acitivies, data science relevant topics and projects can take place in the respective departments. These includes e.g. the department "Research and Development" and "Digital Library", but are not limeted to. Coordination takes place in cross-cutting working groups and service groups.  In addition, there is a close connection to the Chair for Scientific Information Analytics (Prof Bela Gipp, Gipplab, https://gipplab.org/), which offers a direct link to the institute and to research. Furthermore, the Campus Institute Data Science (CIDAS, https://www.uni-goettingen.de/de/634473.html) is a central hub at the Campus Göttingen, where also the library is active.
+----------
+105. Digital Library Department
+----------
+106. Department of technology
+----------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="cell-output cell-output-stdout">
+<pre><code>Describe the staff responsible for data science activities.
+
+
+
+For example:
+
+    What is their background?
+    What are their qualifications and training?
+    What are their specific roles in the organization?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. I have a Bachelors of Science in Electrical Engineering and spent 10 years as an engineer at Intel. I also have a Masters of Library and Information Science. Collection Analysis is something that I have gradually added to my position starting in January 2020. I am mostly self-taught through webinars, Lynda.com, LinkedIn Learning, edX, Medium, and other resources.
+----------
+3. Background: Different university backgrounds, librarians.
+Qualifications and training: Some people have qualifications from their educational background, others have studied data science out of a personal interest, some have taken courses in data science or participated in workshops.
+Roles: They work as librarians or data specialists.
+----------
+4. The Centre for Digital Scholarship employs two data scientists. Both have a background in Computer Science. One data scientist also holds a PhD in Digital Humanities / Computational Literary Studies. The research data engineers offers support to researchers who want to make use of data science methods in their research. They also organise trainings and workshops on programming and on general data science skills. 
+----------
+24. 1. Department leader. Role: communication with the heads of the universitys administration, coordination of the department, reporting. Background: PhD in educational research. M.A. in library science.
+
+2. Research data consultant: advice for researchers, training e.g. data management courses, communication with research groups. Background: M.A. in german linguistics.
+----------
+28. Librarian, small training, 
+----------
+30. # background
+
+- research background (diverse fields, mostly not limited to humanities and social sciences)
+- library &amp; information science 
+- IT
+
+# Qualifications
+
+- MSc, PhD
+- field-specific training (eg, many with LIS background with additional training for IT tasks)
+
+# Roles
+
+- Teaching
+- development &amp; maintenance of IT systems
+- Community management
+- program coordination &amp; project management
+----------
+31. People with experience in several librarian aspects. 
+We have done training in DMP, data stewardship, data visualization, Open Access (including Open Data), etc.
+
+----------
+32. Computer Scientists
+Librarians
+Academic Librarians
+PhD Students
+Post-Docs
+Profs
+----------
+33. They received specific training in data management.
+----------
+35. '-Collections as data
+Team data management: librarians, metadata managers, information scientists,one computer scientist
+Department for automatic Indexing Online Publications: librarians, computer scientists
+Project team “Subject cataloguing with AI methods”: computer scientists
+German Museum for Books and Writing: historians, media scientists, librarians
+-Library intelligence: librarians
+-Research support Department for Digital Services (Digitale Dienste): librarians, metadata specialists
+Five staff members are involved in the activities within the German National Research Data Infrastructure (NFDI) framework: One acting as Lead of Task Area Collections in the Text+ consortium, one coordinating the Task Area Collections as well as the activities of the German National Library within the NFDI, another is responsible for the activities of the Integrated Authority File (Gemeinsame Normdatei, GND) in the Text+ Task Area Infrastructure and Operations, one is charged with representing the GND in the other NFDI consortia in the Humanities and Social Sciences and one develops the GND services for data sciences purposes on a strategic level.
+A consultant on strategies in the field of Digital Humanities is positioned close to the executive management. He develops the strategy in the field, establishes a network of relevant actors in academics and GLAM institutions, organises cooperations with other libraries and universities and occasionally also teaches university courses.
+
+----------
+37. Library staff are well aware of new methods of library key activities.
+----------
+38. Background in Library Science. Specialized training in Open Science and some of them in Research Data Management. 
+----------
+39. Master Degree in Business Administration
+----------
+51. Research Data Steward, previous work around clinical trials research and acquisition and pre-processing of sensitive health data for research projects, MPH.
+
+----------
+60. Management and research is typically led by permanent staff, and research, data processing and analysis is conducted by project staff.
+
+Involved are e.g.
+* management and staff from various library units: Digital Collections, Research &amp; Development, Knowledge Commons
+* experts on TDM, metadata, software development (both from library and cooperating organisations), scholarly communication analytics
+* student assistants
+
+Most activities are based on third-party funded projects and/or working groups based in the library (SUB, GWDG).
+
+Moreover, there are also private research topics, e.g. follow-up of a dissertation (published as: https://doi.org/10.13140/RG.2.2.33177.77920).
+----------
+105. The staff in the Digital Library Department is not only dealing with data science activities. They are also involved in metadata management and digitisation workflow. 
+----------
+106. One developer in the team.
+Background in mathematics
+Has worked as a developer for more than 20 years
+In the library world for 8 years
+No specific training in data science or in library science
+----------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="cell-output cell-output-stdout">
+<pre><code>Who does the library collaborate with, internally or externally to the institution, in carrying out data science activities?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Involved with the ESAC Data Analytics Working Group, though haven't met recently.  Mostly work with colleagues on Twitter or vendors with specific questions.
+----------
+3. There are networks of people working with data science inside the library and between libraries.
+----------
+4. Internally: with curators and project managers of the Special Collections department; the library's IT department, the Projects and Innovations department and subject librarians
+Externally: Individual researchers, the institutional Open Science programme, The Grants office (LURIS), the university's IT department, data stewards at Faculties
+----------
+5. internally collaborate: with Partnerships and Services Marketing Department and Library Leadership.
+externally collaborate: with University Information and Innovation Directorate and Vice-Dean of Science and Rector
+----------
+24. The position of the Research data consultant is currently part of the libraries staff.
+----------
+28. me
+----------
+30. '- Other academic libraries, nationally &amp; internationally
+- Faculty support staff (eg faculty data managers)
+- IT dept in university
+- Faculty &amp; department management (eg, joint development of indicators/dashboards for research evaluation)
+- External parties, eg publishers (Elsevier!) or other companies with specific expertise
+----------
+31. With the CSUC consortium.
+----------
+32. Local universities
+International Universities
+Other libraries nationally and internationally
+----------
+33. The teaching and research support coordinator
+----------
+35. '-Collections as Data
+Internally amongst the departments e.g. amongst IT department and the Department for Automatic Indexing Online Publications or the Department for Acquisition and Cataloguing
+With other libraries in Germany e.g. via the German Regional Library Networks or single libraries working on similar topics
+The Integrated Authority File (GND) is cooperatively managed by the German National Library, all library networks of the German-speaking countries and their participating libraries, the German Union Catalogue of Serials, and many other institutions. Its aim is also to extend the existing cooperation between libraries further e.g. other GLAM institutions or to the public in general.
+
+The project “Subject cataloguing with AI methods” strives to create a Network for machine-based cataloguing processes to further the exchange of knowledge and experience in this area (Network for machine-based cataloguing processes).
+DNB engages in large infrastructure projects such as in the German National Research Data Infrastructure (NFDI) framework. As project partner e.g.in Text+ and NFDI4culture, but also as participant in NFDI4objects and NFDI4memory. In this way, cooperations with numerous universites, institutions of cultural heritage and research facilities in Germany are established and strengthened.
+
+-Research support
+To promote the services and research support offered by DNB contact to research insititutions is maintained and increased:
+-universities
+-professional societies 
+
+----------
+37. Research head and chief information officer.
+----------
+38. Internally, with the Research Unit and the Training Unit of the university. Externally, with other university libraries through various regional and state working groups in different library organizations.
+----------
+51. IT Services and RSE, research support activities are open to all staff and students.
+Notionally, the big archival suppliers - Gale, Adam Matthew, ProQuest - help as to allow the collections to be used as data
+Jisc do analysis around big deals
+Library Hub and other metadata providers
+Sheffield AI / Turing
+University of Sheffield Computer Data Science Department
+----------
+60. Collaborations include:
+* university research groups
+* GWDG, computating and IT competence center
+* external cooperation partners in 3rd party funded projects
+* UC Davis for text mining collaboration on UN SDGs
+* University of Oxford for MINE
+* Dataverse community
+* DARIAH community
+* Text+ community
+* National Research Data Infrastructure Germany (NFDI) 
+* Campus-Institut Data Science (CIDAS)
+* German Centre for Higher Education Research and Science Studies (DZHW), GESIS Leibniz Institut für Sozialwissenschaften, Universität Bielefeld
+* German Competence Center for Bibliometrics
+* rOpenSci community (https://ropensci.org/community/)
+----------
+105. National Library of Serbia is cooperating with the Mathematical Institute of the Serbian Academy of Sciences and Arts, SERBIA (as the technical partner for digital library), Semantika, SLOVENIA (as the technical partner for the aggregator) and Europeana, THE NETHERLANDS/EU
+----------
+106. We collaborate mostly with private companies. Also with publicly supported foundations that provide IT services for universities.
+----------</code></pre>
+</div>
+</div>
+</section>
+<section id="challenges" class="level2">
+<h2 class="anchored" data-anchor-id="challenges">Challenges</h2>
+<div class="cell" data-execution_count="28">
+<div class="cell-output cell-output-stdout">
+<pre><code>What are the challenges faced by the library in carrying out data science activities? 
+
+These can be any barriers or difficulties in implementing data science activities.</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="29">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Lack of staff. It's only me and I have a list of ideas that I'll never have the time to get to. Hard to communicate what exactly I do. Often called "magic" here. 
+----------
+3. It takes a lot of time to get the qualifications to develop data science activities.
+----------
+4. CapacityL: there is a high demand for support of this nature, while our centre only employs two data scientists. Projects tend to be time-consuming. In some cases, researchers lack a good understanding of techniques. In such situtations, quite some time is needed to explain concepts and techniques. Researchers often work with with materials that cannot easily be searched using data science techniques (e.g. texts in non-Western scripts, documents which cannot be OCR'ed well, historical texts). There can also be copyright issues.
+----------
+5. lack of physical back-up storage, Lack of processes and systems: When data is gathered from many sources, inconsistency in the data is unavoidable. Inadequate data management processes and systems contribute to inaccurate data. As a result of the insufficient amount of data, the data is of poor quality and does not fulfill the criteria.
+----------
+24. The research data consultant is employed on a fixed term contract because he is part of a project with a limited duration.
+----------
+28. xx
+----------
+30. Lack of time and skills (lots of development in the field, difficult to keep up to date); Lack of useful data (Third-party databases are useful but often have gaps in their data due to specific focus (eg focus on North-America); Much of the current manual work is very diverse and difficult to make uniform and therefor to automate.
+----------
+31. Lack of awareness, lack of institutional policies, lack of training, etc
+----------
+32. Computer scientists’ resources; Metadata expert resources; Data quality or percentage of data with specific IDs (GND-ID)
+----------
+33. The researchers are not used to sharing their datasets. 
+----------
+35. '-Data quality (unstructured data, missing data, mistakes) -Insufficient data (quantities) -A major challenge is certainly the limited access to our library’s collection. The Law on the German National Library allows access to the collection only on site – including digital material. Only the metadata can be provided outside the library’s facilities. Finding ways to allow remote research on our collection is a desideratum.
+----------
+37. Lack of skilled manpower
+----------
+38. Lack of human resources and budget.
+----------
+51. Generally, the skills - especially the high-level skills - are concentrated in too few people, and elsewhere it is not articulated in people’s job descriptions  Resource availability - low numbers of staff capable of data science activities Up-skiling of staff to aid with their understanding of opportunities/capabilities of AI Data education (cleaning, describing, validating, predicting ….  Prior to AI) !  Research support - Engaging with academics doing research and encouraging them to change working practice to improve Research Data Management approach. Timely intervention so that practices are done at the correct time in the research lifecycle.
+----------
+60. * TDM activities: An in-house working group has started to address the complex task of creating a detailed overview of licenses (institutional, national, Alliance of German Science Organisations, other) and respective archiving and TDM rights (user groups, content formats, metadata formats, etc.). Based on these conditions local TDM services will integrate access to these collections.  * General: Many opportunities to engage and expand activities but underfunded resp. short-term funding via third-party projects. 
+----------
+105. A general lack of staff, especially IT professionals, but also the lack of support from the authorities at all levels.
+----------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="33">
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-34-output-1.png" width="711" height="563"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="34">
+<div class="cell-output cell-output-stdout">
+<pre><code>Does the library have ways of addressing legal or ethical challenges related to data science activities?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="35">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Not really
+----------
+3. We give consideration to the rights and terms when we collect data. Ethical aspects are considered when we make bibliometric analyses.
+----------
+4. The library has a 'Copyright Information Point' which can advise on these matters. In some cases, additional budgets can be allocated to gain access to specific collections. 
+----------
+5. The university has a legal department, we work with them.
+----------
+24. We act conforming to the German copyright law and also are aware of the CARE principles.
+----------
+28. xx
+----------
+30. Legal: legal &amp; privacy officers available at university.
+Ethical: no structured method, issues discussed as they become relevant 
+----------
+31. Library has some resources, but we send the other things to the legal department of the university.
+----------
+32. Legal department, but sometimes really difficult to find solutions (e.g. what can we do with abstracts…?)
+----------
+33. Yes. The university has a Legal Office and a Data Protection Officer. Both of them help us in these issues.
+----------
+35. Metadata can be used freely according to a CC0 license, free online publications and digitized sources with expired copyright can be used freely, most other content print and digitized can only be viewed and analyzed on the premises of DNB.
+No personal data of users are collected in the statistics used for library intelligence purposes.
+
+The involvement in the Text+ consortium within the German National Research Data Infrastructure (NFDI) gives the German National Library (DNB) the opportunity to engage in finding ways to allow research on material protected by copyright, e.g. by provoding derived text formats, as this is a major issue in the work programme. Another milestone is an „Assessment of the impact of the Directive on Copyright in the Digital Single Market and its German transposition on the legal status of Collections“. The DNB is also involved in the NFDI wide section Ethical, Legal and Social Aspects (ELSA). 
+
+----------
+37. Yes
+----------
+38. We send them to the university's Legal Advisory Service. 
+----------
+39. No
+----------
+51. Contact with the University Data Protection Office around governance for data collection/storage.
+
+Jisc negotiate the majority of our license terms
+
+Training is provided in relation to personal identifiers and the wider context of ethical issues when using data to produce statistics.  
+----------
+60.  * Licensing and rights management (for content, user data), e.g. TDM activities build on diverse licenses for collections 
+ * Access for users to the outcome of mining (e.g. graph with keywords) but not necessarily to the full text
+* Software licensing (e.g. GeoBrowser)
+* For scholarly communication analytics the focus is on open data sources. Proprietary bibliometric data sources are accessed through a dedicated data infrastructure and governed by a SLA. 
+----------
+105. There is no right support for addressing legal challenges. And ethical challenges are not on the table yet. 
+----------</code></pre>
+</div>
+</div>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<ul>
+<li><p>Not really</p></li>
+<li><p>The library has a ‘Copyright Information Point’ which can advise on these matters. The university has a legal department, we work with them. legal &amp; privacy officers available at university. sometimes really difficult to find solutions (e.g.&nbsp;what can we do with abstracts…?) The university has a Legal Office and a Data Protection Officer. We send them to the university’s Legal Advisory Service. Contact with the University Data Protection Office around governance for data collection/storage. Jisc negotiate the majority of our license terms.</p></li>
+<li><p>No personal data of users are collected in the statistics used for library intelligence purposes. Training is provided in relation to personal identifiers and the wider context of ethical issues when using data to produce statistics.</p></li>
+<li><p>We give consideration to the rights and terms when we collect data. Ethical aspects are considered when we make bibliometric analyses. We act conforming to the German copyright law and also are aware of the CARE principles.</p></li>
+<li><p>Ethical: no structured method, issues discussed as they become relevant</p></li>
+</ul>
+<p>The involvement in the Text+ consortium within the German National Research Data Infrastructure (NFDI) gives the German National Library (DNB) the opportunity to engage in finding ways to allow research on material protected by copyright, e.g.&nbsp;by provoding derived text formats, as this is a major issue in the work programme. Another milestone is an „Assessment of the impact of the Directive on Copyright in the Digital Single Market and its German transposition on the legal status of Collections“. The DNB is also involved in the NFDI wide section Ethical, Legal and Social Aspects (ELSA).</p>
+</section>
+</section>
+<section id="funding" class="level2">
+<h2 class="anchored" data-anchor-id="funding">Funding</h2>
+<div class="cell" data-execution_count="36">
+<div class="cell-output cell-output-stdout">
+<pre><code>How are the data science activities typically funded?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="37">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. No additional or special funding beyond my regular salary
+----------
+3. Internal funding.
+----------
+4. We are often involved in externally funded research projects. Our activities can often be funded using these research budgets. In other cases, we are funded by the library. 
+----------
+5. from university or library budget
+----------
+24. Ministry for Science of the federal state.
+----------
+28. ..
+----------
+30. '- library budget 
+- university funding for projects
+----------
+31. We use the university resources. Researchers have budgets from the university or from other funders (institutional funders, usually).
+----------
+32. Internal budget, personnel
+Projects/third-party funding
+
+----------
+33. With European projects or the National Research Agency. 
+----------
+35. internally, sometimes projects funded by German Research Foundation partly under the  German National Research Data Infrastructure (NFDI) framework, the German Research Foundation (DFG) or the commissioner of the federal government for culture and media
+----------
+37. From grants provided by research projects
+----------
+38. As with the rest of the activities, from the Library's normal budget. 
+----------
+39. governement
+----------
+51. Research council funding or core staff.
+----------
+60. Internal resources combined with third-party funding (national, European)
+* Internal funds, based on regular staff and temporary staff 
+* Third-party funding: e.g. TextGrid is cofunded by the German Ministry of Education and Research (BMBF), CLARIAH (DARIAH-DE, CLARIAH-DE) funded by BMBF
+----------
+105. Data science activities are funded through the annual budget coming from the Ministry of Culture / Government. Additional funding is coming from European projects.
+----------</code></pre>
+</div>
+</div>
+<section id="summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="summary-1">Summary</h3>
+<p>Three main sources of funding are mentioned:</p>
+<ul>
+<li>Regular salaries (library budget)</li>
+<li>University funding for projects</li>
+<li>Involvement in externally funded research projects / grants provided by research projects / Funding by research councils (Ministry for Science of the federal state, EU, National Research Agency, German National Research Data Infrastructure (NFDI) framework, the German Research Foundation (DFG), Commissioner of the federal government for culture and media)</li>
+</ul>
+</section>
+</section>
+<section id="ambitions" class="level2">
+<h2 class="anchored" data-anchor-id="ambitions">Ambitions</h2>
+<div class="cell" data-execution_count="38">
+<div class="cell-output cell-output-stdout">
+<pre><code>What library data science activities are planned (if any) in the future?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="39">
+<div class="cell-output cell-output-stdout">
+<pre><code>2. Automating the publishing profiler in Python, automating a name lookup in the staff directory to see who an author is (department, college, level). 
+----------
+3. We work continuously on developing data science skills among the library staff.
+We are in contact with the faculty on how to support them with teaching.
+----------
+4. Development of courses on Machine Learning; Organisation of Summer School on digital scholarship; Involvement in research projects working with Linked Open Data; Setting up a 'data foundry' to facilitate the use of 'Collections as Data'; Setting up projects in the field of research intelligence
+----------
+24. 1. Evaluation of the activies and the needs by using data science method, e.g. web analytics of our discovery system.
+
+2. Supporting workflows and processes like cataloging with AI and similar methods.
+----------
+28. ..
+----------
+30. '- Improved automated collection of currently non-standard research activities (eg media appearances)
+- automated cataloging/attribution of meta-data
+- decreasing dependence on few large data providers
+- see **experimental** tag in list of DS activities
+----------
+31. To increase our data science training for training and helping our users. If it is possible, we would like to train students for preparing them for future (and present). 
+
+
+----------
+32. Focusing on the author's name disambiguation and clustering
+Identifying duplicate publications and grouping them into one instance
+Creating extensive author profiles using the existing library and non-library resources
+Enriching bibliographic data with (more) PIDs and other information such as citation metrics, search data, etc.
+Working towards setting up a Knowledge Graph and linking/making use of any existing ones Wikidata, OpenAlex, OpenAir, etc.
+ 
+
+----------
+33. To collaborate with CSUC (Corsortium) in improving our Data Reposity, Training Session for PhD Students and Researchers.
+----------
+35. '-Expand the use of full texts e.g. in automatic processes to automatically create content descriptive information 
+-Experimenting with machine learning techniques to disambiguate frequent names 
+-Take over metadata elements from manifestation clusters
+-Explore machine learning methods for subject indexing 
+-Include other external data sources in analyses (Wikidata, CrossRef etc.)
+
+----------
+37. Making a knowledge hub for research work
+----------
+38. Continue with the existing ones, expanding to new services if we have the human resources to do so. 
+----------
+51. FAIR guidance being created.
+Planning work with Computer Science Department that initiates projects in which students can become involved in areas such as text processing / chatbots (Decision Trees) and deploying Machine Learning.
+----------
+60. 
+* Establishing collaborative research with professor and research lab on scientific information analytics is in early stages (GippLab, https://gipplab.org/). 
+* Open scholarly data: Opening up analytical data to partners (research and libraries)
+* IaaS to govern use cloud-based big data analytics services in collaboration with the GWDG
+----------
+105. National Library of Serbia published the Serbian translation of the book OPEN A GLAM LAB in May 2023. Launching a library lab is planned for the future.
+----------</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="40">
+<div class="cell-output cell-output-stdout">
+<pre><code>Anything else to add?</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="41">
+<div class="cell-output cell-output-stdout">
+<pre><code>4. In the Netherlands, topics such as these are also discussed in the UKB Digital Scholarship working group.
+----------
+30. I have used a very broad definition of data science, including more social/community related tasks that are important to increase acceptance of the more 'technical' tasks. 
+----------
+37. How I can join in the projects conducted by LIBER,?
+----------</code></pre>
+</div>
+</div>
+<p>A number of respondents had indicated that they may be contacted if we need further information. The mail addresses are in the survey results.</p>
+<!-- -->
+
 </section>
 
 </main>
@@ -279,6 +1037,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -432,7 +1241,331 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb25" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "LIBER DSLib Survey"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>The LIBER Data Science in Libraries (DSLib) working group explores and promotes library engagement in applying data science and analytical methods in libraries, taking into account all kinds of processes and workflows around library collections and metadata as well as digital infrastructures and service areas.</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> QualtricsAPI.Setup <span class="im">import</span> Credentials</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> QualtricsAPI.Survey <span class="im">import</span> Responses</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns   </span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Load Qualtrics credentials from file</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'C:/Users/Moope001/.auth/qualtrics-key.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>     key_contents <span class="op">=</span> f.read().strip()</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>api_token <span class="op">=</span> key_contents.split(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)[<span class="dv">0</span>].split(<span class="st">'='</span>)[<span class="dv">1</span>]</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>data_center <span class="op">=</span> key_contents.split(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)[<span class="dv">1</span>].split(<span class="st">'='</span>)[<span class="dv">1</span>]</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Authenticate with Qualtrics API</span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>Credentials().qualtrics_api_credentials(token<span class="op">=</span>api_token, data_center<span class="op">=</span>data_center)</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Load survey ID and name from file</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'config/survey.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> f:</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>    survey_contents <span class="op">=</span> f.read().strip()</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>survey_name, survey_id <span class="op">=</span> survey_contents.split(<span class="st">','</span>)</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve survey responses and save to CSV file</span></span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> Responses().get_survey_responses(survey<span class="op">=</span>survey_id)</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>survey.to_csv(<span class="st">'data/datascience_survey.csv'</span>)</span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-58"><a href="#cb25-58" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bar_chart(question_nr,width<span class="op">=</span><span class="dv">5</span>,height<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb25-59"><a href="#cb25-59" aria-hidden="true" tabindex="-1"></a>    responses <span class="op">=</span> survey[question_nr].dropna().tolist()</span>
+<span id="cb25-60"><a href="#cb25-60" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> Counter(responses)</span>
+<span id="cb25-61"><a href="#cb25-61" aria-hidden="true" tabindex="-1"></a>    y_axis <span class="op">=</span> <span class="bu">list</span>(counts.keys())</span>
+<span id="cb25-62"><a href="#cb25-62" aria-hidden="true" tabindex="-1"></a>    x_axis <span class="op">=</span> <span class="bu">list</span>(counts.values())</span>
+<span id="cb25-63"><a href="#cb25-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-64"><a href="#cb25-64" aria-hidden="true" tabindex="-1"></a>    sns.<span class="bu">set</span>(rc<span class="op">=</span>{<span class="st">'figure.figsize'</span>:(width,height)})</span>
+<span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-66"><a href="#cb25-66" aria-hidden="true" tabindex="-1"></a>    sns.barplot( x<span class="op">=</span>x_axis, </span>
+<span id="cb25-67"><a href="#cb25-67" aria-hidden="true" tabindex="-1"></a>                y<span class="op">=</span>y_axis , </span>
+<span id="cb25-68"><a href="#cb25-68" aria-hidden="true" tabindex="-1"></a>               color <span class="op">=</span> <span class="st">'#fcba03'</span> )</span>
+<span id="cb25-69"><a href="#cb25-69" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb25-70"><a href="#cb25-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-71"><a href="#cb25-71" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_responses(question_nr):</span>
+<span id="cb25-72"><a href="#cb25-72" aria-hidden="true" tabindex="-1"></a>    responses <span class="op">=</span> survey[question_nr]</span>
+<span id="cb25-73"><a href="#cb25-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,response <span class="kw">in</span> <span class="bu">enumerate</span>(responses):</span>
+<span id="cb25-74"><a href="#cb25-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> pd.isna(response):</span>
+<span id="cb25-75"><a href="#cb25-75" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">2</span><span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-76"><a href="#cb25-76" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'----------'</span>)</span>
+<span id="cb25-77"><a href="#cb25-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-78"><a href="#cb25-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-81"><a href="#cb25-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-82"><a href="#cb25-82" aria-hidden="true" tabindex="-1"></a><span class="co"># first two rows contain column names and data types</span></span>
+<span id="cb25-83"><a href="#cb25-83" aria-hidden="true" tabindex="-1"></a>questions <span class="op">=</span> survey.iloc[<span class="dv">0</span>]</span>
+<span id="cb25-84"><a href="#cb25-84" aria-hidden="true" tabindex="-1"></a>survey <span class="op">=</span> survey.iloc[<span class="dv">2</span>:]</span>
+<span id="cb25-85"><a href="#cb25-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-86"><a href="#cb25-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-87"><a href="#cb25-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Response</span></span>
+<span id="cb25-88"><a href="#cb25-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-92"><a href="#cb25-92" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( <span class="ss">f'There are </span><span class="sc">{</span>survey<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> responses'</span>)</span>
+<span id="cb25-93"><a href="#cb25-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-94"><a href="#cb25-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-97"><a href="#cb25-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-98"><a href="#cb25-98" aria-hidden="true" tabindex="-1"></a>survey[<span class="st">'date'</span>]<span class="op">=</span> pd.to_datetime(survey[<span class="st">'StartDate'</span>])</span>
+<span id="cb25-99"><a href="#cb25-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-100"><a href="#cb25-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-103"><a href="#cb25-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-104"><a href="#cb25-104" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The surveys have been completed in between </span><span class="sc">{</span>survey[<span class="st">'date'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">.</span>strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)<span class="sc">}</span><span class="ss"> and </span><span class="sc">{</span>survey[<span class="st">'date'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">.</span>strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-105"><a href="#cb25-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-106"><a href="#cb25-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-107"><a href="#cb25-107" aria-hidden="true" tabindex="-1"></a>The surveys have not been filled out completely in all cases.</span>
+<span id="cb25-108"><a href="#cb25-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-111"><a href="#cb25-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-112"><a href="#cb25-112" aria-hidden="true" tabindex="-1"></a>progress <span class="op">=</span> survey.groupby(<span class="st">'Progress'</span>)[<span class="st">'ResponseId'</span>].count()</span>
+<span id="cb25-113"><a href="#cb25-113" aria-hidden="true" tabindex="-1"></a>progress_dict <span class="op">=</span> progress.to_dict()</span>
+<span id="cb25-114"><a href="#cb25-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert string keys to integers</span></span>
+<span id="cb25-115"><a href="#cb25-115" aria-hidden="true" tabindex="-1"></a>progress_dict <span class="op">=</span> {<span class="bu">int</span>(k):<span class="bu">int</span>(v) <span class="cf">for</span> k,v <span class="kw">in</span> progress_dict.items()}</span>
+<span id="cb25-116"><a href="#cb25-116" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> percentage <span class="kw">in</span> <span class="bu">sorted</span>(progress_dict):</span>
+<span id="cb25-117"><a href="#cb25-117" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>percentage<span class="sc">}</span><span class="ss">% : </span><span class="sc">{</span>progress_dict[percentage]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb25-118"><a href="#cb25-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-119"><a href="#cb25-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-120"><a href="#cb25-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Job Title</span></span>
+<span id="cb25-121"><a href="#cb25-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-124"><a href="#cb25-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-125"><a href="#cb25-125" aria-hidden="true" tabindex="-1"></a>questions[<span class="st">'Q4'</span>]</span>
+<span id="cb25-126"><a href="#cb25-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-127"><a href="#cb25-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-130"><a href="#cb25-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-131"><a href="#cb25-131" aria-hidden="true" tabindex="-1"></a>bar_chart(<span class="st">'Q4'</span>)</span>
+<span id="cb25-132"><a href="#cb25-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-133"><a href="#cb25-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-134"><a href="#cb25-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Institutions</span></span>
+<span id="cb25-135"><a href="#cb25-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-138"><a href="#cb25-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-139"><a href="#cb25-139" aria-hidden="true" tabindex="-1"></a>questions[<span class="st">'Q5'</span>]</span>
+<span id="cb25-140"><a href="#cb25-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-141"><a href="#cb25-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-144"><a href="#cb25-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-145"><a href="#cb25-145" aria-hidden="true" tabindex="-1"></a>bar_chart(<span class="st">'Q5'</span>)</span>
+<span id="cb25-146"><a href="#cb25-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-147"><a href="#cb25-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-148"><a href="#cb25-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Science Activities</span></span>
+<span id="cb25-149"><a href="#cb25-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-152"><a href="#cb25-152" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-153"><a href="#cb25-153" aria-hidden="true" tabindex="-1"></a><span class="co">#print(questions['Q7'])</span></span>
+<span id="cb25-154"><a href="#cb25-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-155"><a href="#cb25-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-158"><a href="#cb25-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-159"><a href="#cb25-159" aria-hidden="true" tabindex="-1"></a><span class="co">#print_responses('Q7')</span></span>
+<span id="cb25-160"><a href="#cb25-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-161"><a href="#cb25-161" aria-hidden="true" tabindex="-1"></a><span class="co">#print_responses('Q10')</span></span>
+<span id="cb25-162"><a href="#cb25-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-163"><a href="#cb25-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-166"><a href="#cb25-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-167"><a href="#cb25-167" aria-hidden="true" tabindex="-1"></a><span class="co"># categories = ['Library Intelligence','Research Support',</span></span>
+<span id="cb25-168"><a href="#cb25-168" aria-hidden="true" tabindex="-1"></a><span class="co"># 'Collections as Data','Research Intelligence']</span></span>
+<span id="cb25-169"><a href="#cb25-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-170"><a href="#cb25-170" aria-hidden="true" tabindex="-1"></a><span class="co"># categories_count = Counter()</span></span>
+<span id="cb25-171"><a href="#cb25-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-172"><a href="#cb25-172" aria-hidden="true" tabindex="-1"></a><span class="co"># responses = survey['Q7'].dropna().tolist()</span></span>
+<span id="cb25-173"><a href="#cb25-173" aria-hidden="true" tabindex="-1"></a><span class="co"># for response in responses:</span></span>
+<span id="cb25-174"><a href="#cb25-174" aria-hidden="true" tabindex="-1"></a><span class="co">#     selected_categories = []</span></span>
+<span id="cb25-175"><a href="#cb25-175" aria-hidden="true" tabindex="-1"></a><span class="co">#     for c in categories:</span></span>
+<span id="cb25-176"><a href="#cb25-176" aria-hidden="true" tabindex="-1"></a><span class="co">#         if re.search( r'\b{}\b'.format(c) , response ):</span></span>
+<span id="cb25-177"><a href="#cb25-177" aria-hidden="true" tabindex="-1"></a><span class="co">#             selected_categories.append(c)</span></span>
+<span id="cb25-178"><a href="#cb25-178" aria-hidden="true" tabindex="-1"></a><span class="co">#     print(selected_categories)</span></span>
+<span id="cb25-179"><a href="#cb25-179" aria-hidden="true" tabindex="-1"></a><span class="co">#     categories_count.update(selected_categories)</span></span>
+<span id="cb25-180"><a href="#cb25-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-181"><a href="#cb25-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-184"><a href="#cb25-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-185"><a href="#cb25-185" aria-hidden="true" tabindex="-1"></a><span class="co"># y_axis = list(categories_count.keys())</span></span>
+<span id="cb25-186"><a href="#cb25-186" aria-hidden="true" tabindex="-1"></a><span class="co"># x_axis = list(categories_count.values())</span></span>
+<span id="cb25-187"><a href="#cb25-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-188"><a href="#cb25-188" aria-hidden="true" tabindex="-1"></a><span class="co"># sns.set(rc={'figure.figsize':(5,7)})</span></span>
+<span id="cb25-189"><a href="#cb25-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-190"><a href="#cb25-190" aria-hidden="true" tabindex="-1"></a><span class="co"># sns.barplot( x=x_axis, </span></span>
+<span id="cb25-191"><a href="#cb25-191" aria-hidden="true" tabindex="-1"></a><span class="co">#             y=y_axis , </span></span>
+<span id="cb25-192"><a href="#cb25-192" aria-hidden="true" tabindex="-1"></a><span class="co">#            color = '#bcba09' )</span></span>
+<span id="cb25-193"><a href="#cb25-193" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.show()</span></span>
+<span id="cb25-194"><a href="#cb25-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-195"><a href="#cb25-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-196"><a href="#cb25-196" aria-hidden="true" tabindex="-1"></a>Respondents appear to agree with the overview of data science activties. There was only one suggestion for a new category.</span>
+<span id="cb25-197"><a href="#cb25-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-200"><a href="#cb25-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-201"><a href="#cb25-201" aria-hidden="true" tabindex="-1"></a>disagreement <span class="op">=</span> survey[<span class="st">'Q8'</span>].dropna().tolist()</span>
+<span id="cb25-202"><a href="#cb25-202" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> response <span class="kw">in</span> disagreement:</span>
+<span id="cb25-203"><a href="#cb25-203" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(response)</span>
+<span id="cb25-204"><a href="#cb25-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-205"><a href="#cb25-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-206"><a href="#cb25-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Library Intelligence</span></span>
+<span id="cb25-207"><a href="#cb25-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-210"><a href="#cb25-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-211"><a href="#cb25-211" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q9'</span>])</span>
+<span id="cb25-212"><a href="#cb25-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-213"><a href="#cb25-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-216"><a href="#cb25-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-217"><a href="#cb25-217" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q9'</span>)</span>
+<span id="cb25-218"><a href="#cb25-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-219"><a href="#cb25-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-220"><a href="#cb25-220" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tasks &amp; Responsibilities of library staff working with data science</span></span>
+<span id="cb25-221"><a href="#cb25-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-224"><a href="#cb25-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-225"><a href="#cb25-225" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q10'</span>])</span>
+<span id="cb25-226"><a href="#cb25-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-227"><a href="#cb25-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-230"><a href="#cb25-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-231"><a href="#cb25-231" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q10'</span>)</span>
+<span id="cb25-232"><a href="#cb25-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-233"><a href="#cb25-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-236"><a href="#cb25-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-237"><a href="#cb25-237" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q11'</span>])</span>
+<span id="cb25-238"><a href="#cb25-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-239"><a href="#cb25-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-242"><a href="#cb25-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-243"><a href="#cb25-243" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q11'</span>)</span>
+<span id="cb25-244"><a href="#cb25-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-245"><a href="#cb25-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-248"><a href="#cb25-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-249"><a href="#cb25-249" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q12'</span>])</span>
+<span id="cb25-250"><a href="#cb25-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-251"><a href="#cb25-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-254"><a href="#cb25-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-255"><a href="#cb25-255" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q12'</span>)</span>
+<span id="cb25-256"><a href="#cb25-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-257"><a href="#cb25-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-258"><a href="#cb25-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## Challenges</span></span>
+<span id="cb25-259"><a href="#cb25-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-262"><a href="#cb25-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-263"><a href="#cb25-263" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q13'</span>])</span>
+<span id="cb25-264"><a href="#cb25-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-265"><a href="#cb25-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-268"><a href="#cb25-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-269"><a href="#cb25-269" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q13'</span>)</span>
+<span id="cb25-270"><a href="#cb25-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-271"><a href="#cb25-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-274"><a href="#cb25-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-275"><a href="#cb25-275" aria-hidden="true" tabindex="-1"></a>challenges <span class="op">=</span> {<span class="dv">1</span>:<span class="st">'Lack of staff'</span>,</span>
+<span id="cb25-276"><a href="#cb25-276" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>:<span class="st">'Staff has insuffient skills'</span>,</span>
+<span id="cb25-277"><a href="#cb25-277" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>:<span class="st">'Lack of awareness of what data science entails'</span>,</span>
+<span id="cb25-278"><a href="#cb25-278" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>:<span class="st">'Low data quality or inaccurate data'</span>,</span>
+<span id="cb25-279"><a href="#cb25-279" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>:<span class="st">'Copyright issues'</span>,</span>
+<span id="cb25-280"><a href="#cb25-280" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>:<span class="st">'Insfrastructural problems'</span>,</span>
+<span id="cb25-281"><a href="#cb25-281" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>:<span class="st">'No policy / no mandata from management'</span>,</span>
+<span id="cb25-282"><a href="#cb25-282" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>:<span class="st">'Lack of awareness among researchers'</span>,</span>
+<span id="cb25-283"><a href="#cb25-283" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>:<span class="st">'No or poor accessibility of the data'</span></span>
+<span id="cb25-284"><a href="#cb25-284" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-285"><a href="#cb25-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-286"><a href="#cb25-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-289"><a href="#cb25-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-290"><a href="#cb25-290" aria-hidden="true" tabindex="-1"></a>challenges_responses <span class="op">=</span> {</span>
+<span id="cb25-291"><a href="#cb25-291" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>:[<span class="dv">1</span>,<span class="dv">3</span>],</span>
+<span id="cb25-292"><a href="#cb25-292" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>:[<span class="dv">2</span>],</span>
+<span id="cb25-293"><a href="#cb25-293" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>:[<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>],</span>
+<span id="cb25-294"><a href="#cb25-294" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>:[<span class="dv">4</span>,<span class="dv">6</span>],</span>
+<span id="cb25-295"><a href="#cb25-295" aria-hidden="true" tabindex="-1"></a><span class="dv">24</span>:[<span class="dv">1</span>],</span>
+<span id="cb25-296"><a href="#cb25-296" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span>:[<span class="dv">1</span>,<span class="dv">2</span>],</span>
+<span id="cb25-297"><a href="#cb25-297" aria-hidden="true" tabindex="-1"></a><span class="dv">31</span>:[<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">7</span>],</span>
+<span id="cb25-298"><a href="#cb25-298" aria-hidden="true" tabindex="-1"></a><span class="dv">32</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>],</span>
+<span id="cb25-299"><a href="#cb25-299" aria-hidden="true" tabindex="-1"></a><span class="dv">33</span>:[<span class="dv">8</span>],</span>
+<span id="cb25-300"><a href="#cb25-300" aria-hidden="true" tabindex="-1"></a><span class="dv">35</span>:[<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">6</span>],</span>
+<span id="cb25-301"><a href="#cb25-301" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span>:[<span class="dv">1</span>],</span>
+<span id="cb25-302"><a href="#cb25-302" aria-hidden="true" tabindex="-1"></a><span class="dv">38</span>:[<span class="dv">1</span>],</span>
+<span id="cb25-303"><a href="#cb25-303" aria-hidden="true" tabindex="-1"></a><span class="dv">51</span>:[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">8</span>] ,</span>
+<span id="cb25-304"><a href="#cb25-304" aria-hidden="true" tabindex="-1"></a><span class="dv">60</span>: [<span class="dv">5</span>,]}</span>
+<span id="cb25-305"><a href="#cb25-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-306"><a href="#cb25-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-309"><a href="#cb25-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-310"><a href="#cb25-310" aria-hidden="true" tabindex="-1"></a>challenges_counter <span class="op">=</span> Counter()</span>
+<span id="cb25-311"><a href="#cb25-311" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> challenges_responses.values():</span>
+<span id="cb25-312"><a href="#cb25-312" aria-hidden="true" tabindex="-1"></a>    challenges_counter.update(c)</span>
+<span id="cb25-313"><a href="#cb25-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-314"><a href="#cb25-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-317"><a href="#cb25-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-318"><a href="#cb25-318" aria-hidden="true" tabindex="-1"></a>y_axis <span class="op">=</span> <span class="bu">list</span>(challenges.values())</span>
+<span id="cb25-319"><a href="#cb25-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-320"><a href="#cb25-320" aria-hidden="true" tabindex="-1"></a>x_axis <span class="op">=</span> <span class="bu">list</span>(challenges_counter.values())</span>
+<span id="cb25-321"><a href="#cb25-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-322"><a href="#cb25-322" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(rc<span class="op">=</span>{<span class="st">'figure.figsize'</span>:(<span class="dv">5</span>,<span class="dv">7</span>)})</span>
+<span id="cb25-323"><a href="#cb25-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-324"><a href="#cb25-324" aria-hidden="true" tabindex="-1"></a>sns.barplot( x<span class="op">=</span>x_axis, </span>
+<span id="cb25-325"><a href="#cb25-325" aria-hidden="true" tabindex="-1"></a>            y<span class="op">=</span>y_axis , </span>
+<span id="cb25-326"><a href="#cb25-326" aria-hidden="true" tabindex="-1"></a>           color <span class="op">=</span> <span class="st">'#a60c37'</span> )</span>
+<span id="cb25-327"><a href="#cb25-327" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb25-328"><a href="#cb25-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-329"><a href="#cb25-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-332"><a href="#cb25-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-333"><a href="#cb25-333" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q14'</span>])</span>
+<span id="cb25-334"><a href="#cb25-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-335"><a href="#cb25-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-338"><a href="#cb25-338" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-339"><a href="#cb25-339" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q14'</span>)</span>
+<span id="cb25-340"><a href="#cb25-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-341"><a href="#cb25-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-342"><a href="#cb25-342" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb25-343"><a href="#cb25-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-344"><a href="#cb25-344" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Not really</span>
+<span id="cb25-345"><a href="#cb25-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-346"><a href="#cb25-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The library has a 'Copyright Information Point' which can advise on these matters. The university has a legal department, we work with them. legal &amp; privacy officers available at university. sometimes really difficult to find solutions (e.g. what can we do with abstracts…?) The university has a Legal Office and a Data Protection Officer. We send them to the university's Legal Advisory Service. Contact with the University Data Protection Office around governance for data collection/storage. Jisc negotiate the majority of our license terms.</span>
+<span id="cb25-347"><a href="#cb25-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-348"><a href="#cb25-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No personal data of users are collected in the statistics used for library intelligence purposes. Training is provided in relation to personal identifiers and the wider context of ethical issues when using data to produce statistics.</span>
+<span id="cb25-349"><a href="#cb25-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-350"><a href="#cb25-350" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We give consideration to the rights and terms when we collect data. Ethical aspects are considered when we make bibliometric analyses. We act conforming to the German copyright law and also are aware of the CARE principles.</span>
+<span id="cb25-351"><a href="#cb25-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-352"><a href="#cb25-352" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ethical: no structured method, issues discussed as they become relevant</span>
+<span id="cb25-353"><a href="#cb25-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-354"><a href="#cb25-354" aria-hidden="true" tabindex="-1"></a>The involvement in the Text+ consortium within the German National Research Data Infrastructure (NFDI) gives the German National Library (DNB) the opportunity to engage in finding ways to allow research on material protected by copyright, e.g. by provoding derived text formats, as this is a major issue in the work programme. Another milestone is an „Assessment of the impact of the Directive on Copyright in the Digital Single Market and its German transposition on the legal status of Collections“. The DNB is also involved in the NFDI wide section Ethical, Legal and Social Aspects (ELSA).</span>
+<span id="cb25-355"><a href="#cb25-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-356"><a href="#cb25-356" aria-hidden="true" tabindex="-1"></a><span class="fu">## Funding</span></span>
+<span id="cb25-357"><a href="#cb25-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-360"><a href="#cb25-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-361"><a href="#cb25-361" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q15'</span>])</span>
+<span id="cb25-362"><a href="#cb25-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-363"><a href="#cb25-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-366"><a href="#cb25-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-367"><a href="#cb25-367" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q15'</span>)</span>
+<span id="cb25-368"><a href="#cb25-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-369"><a href="#cb25-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-370"><a href="#cb25-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb25-371"><a href="#cb25-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-372"><a href="#cb25-372" aria-hidden="true" tabindex="-1"></a>Three main sources of funding are mentioned:</span>
+<span id="cb25-373"><a href="#cb25-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-374"><a href="#cb25-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Regular salaries (library budget)</span>
+<span id="cb25-375"><a href="#cb25-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>University funding for projects</span>
+<span id="cb25-376"><a href="#cb25-376" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Involvement in externally funded research projects / grants provided by research projects / Funding by research councils (Ministry for Science of the federal state, EU, National Research Agency, German National Research Data Infrastructure (NFDI) framework, the German Research Foundation (DFG), Commissioner of the federal government for culture and media)</span>
+<span id="cb25-377"><a href="#cb25-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-378"><a href="#cb25-378" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ambitions</span></span>
+<span id="cb25-379"><a href="#cb25-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-382"><a href="#cb25-382" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-383"><a href="#cb25-383" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q16'</span>])</span>
+<span id="cb25-384"><a href="#cb25-384" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-385"><a href="#cb25-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-388"><a href="#cb25-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-389"><a href="#cb25-389" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q16'</span>)</span>
+<span id="cb25-390"><a href="#cb25-390" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-391"><a href="#cb25-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-394"><a href="#cb25-394" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-395"><a href="#cb25-395" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(questions[<span class="st">'Q17'</span>])</span>
+<span id="cb25-396"><a href="#cb25-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-397"><a href="#cb25-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-400"><a href="#cb25-400" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb25-401"><a href="#cb25-401" aria-hidden="true" tabindex="-1"></a>print_responses(<span class="st">'Q17'</span>)</span>
+<span id="cb25-402"><a href="#cb25-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb25-403"><a href="#cb25-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-404"><a href="#cb25-404" aria-hidden="true" tabindex="-1"></a>A number of respondents had indicated that they may be contacted if we need further information. The mail addresses are in the survey results.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 
 

@@ -2,8 +2,14 @@ project:
   title: "LIBER DSLib Survey"
   output-dir: docs
 
+execute:
+  echo: false
+
 format:
   html:
+    toc: true
+    toc-title: Contents
+    code-tools: true
     theme: cosmo
 
 

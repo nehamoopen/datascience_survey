@@ -2,6 +2,8 @@
 title: "LIBER DSLib Survey"
 ---
 
+## Introduction
+
 The LIBER Data Science in Libraries (DSLib) working group explores and promotes library engagement in applying data science and analytical methods in libraries, taking into account all kinds of processes and workflows around library collections and metadata as well as digital infrastructures and service areas.
 
 ```{python}
@@ -43,7 +45,6 @@ survey = Responses().get_survey_responses(survey=survey_id)
 survey.to_csv('data/datascience_survey.csv')
 ```
 
-
 ```{python}
 def bar_chart(question_nr,width=5,height=10):
     responses = survey[question_nr].dropna().tolist()
@@ -66,7 +67,6 @@ def print_responses(question_nr):
             print('----------')
 ```
 
-
 ```{python}
 # first two rows contain column names and data types
 questions = survey.iloc[0]
@@ -74,7 +74,6 @@ survey = survey.iloc[2:]
 ```
 
 ## Response
-
 
 ```{python}
 print( f'There are {survey.shape[0]} responses')
@@ -84,13 +83,11 @@ print( f'There are {survey.shape[0]} responses')
 survey['date']= pd.to_datetime(survey['StartDate'])
 ```
 
-
 ```{python}
 print(f"The surveys have been completed in between {survey['date'].min().strftime('%Y-%m-%d')} and {survey['date'].max().strftime('%Y-%m-%d')}")
 ```
 
 The surveys have not been filled out completely in all cases.
-
 
 ```{python}
 progress = survey.groupby('Progress')['ResponseId'].count()
@@ -100,3 +97,227 @@ progress_dict = {int(k):int(v) for k,v in progress_dict.items()}
 for percentage in sorted(progress_dict):
     print(f'{percentage}% : {progress_dict[percentage]}')
 ```
+
+## Job Title
+
+```{python}
+questions['Q4']
+```
+
+```{python}
+bar_chart('Q4')
+```
+
+## Institutions
+
+```{python}
+questions['Q5']
+```
+
+```{python}
+bar_chart('Q5')
+```
+
+## Data Science Activities
+
+```{python}
+#print(questions['Q7'])
+```
+
+```{python}
+#print_responses('Q7')
+
+#print_responses('Q10')
+```
+
+```{python}
+# categories = ['Library Intelligence','Research Support',
+# 'Collections as Data','Research Intelligence']
+
+# categories_count = Counter()
+
+# responses = survey['Q7'].dropna().tolist()
+# for response in responses:
+#     selected_categories = []
+#     for c in categories:
+#         if re.search( r'\b{}\b'.format(c) , response ):
+#             selected_categories.append(c)
+#     print(selected_categories)
+#     categories_count.update(selected_categories)
+```
+
+```{python}
+# y_axis = list(categories_count.keys())
+# x_axis = list(categories_count.values())
+
+# sns.set(rc={'figure.figsize':(5,7)})
+
+# sns.barplot( x=x_axis, 
+#             y=y_axis , 
+#            color = '#bcba09' )
+# plt.show()
+```
+
+Respondents appear to agree with the overview of data science activties. There was only one suggestion for a new category.
+
+```{python}
+disagreement = survey['Q8'].dropna().tolist()
+for response in disagreement:
+    print(response)
+```
+
+## Library Intelligence
+
+```{python}
+print(questions['Q9'])
+```
+
+```{python}
+print_responses('Q9')
+```
+
+## Tasks & Responsibilities of library staff working with data science
+
+```{python}
+print(questions['Q10'])
+```
+
+```{python}
+print_responses('Q10')
+```
+
+```{python}
+print(questions['Q11'])
+```
+
+```{python}
+print_responses('Q11')
+```
+
+```{python}
+print(questions['Q12'])
+```
+
+```{python}
+print_responses('Q12')
+```
+
+## Challenges
+
+```{python}
+print(questions['Q13'])
+```
+
+```{python}
+print_responses('Q13')
+```
+
+```{python}
+challenges = {1:'Lack of staff',
+ 2:'Staff has insuffient skills',
+ 3:'Lack of awareness of what data science entails',
+ 4:'Low data quality or inaccurate data',
+ 5:'Copyright issues',
+ 6:'Insfrastructural problems',
+ 7:'No policy / no mandata from management',
+ 8:'Lack of awareness among researchers',
+ 9:'No or poor accessibility of the data'
+}
+```
+
+```{python}
+challenges_responses = {
+2:[1,3],
+3:[2],
+4:[1,3,4,5],
+5:[4,6],
+24:[1],
+30:[1,2],
+31:[3,2,7],
+32:[1,2,4],
+33:[8],
+35:[4,9,6],
+37:[1],
+38:[1],
+51:[1,2,8] ,
+60: [5,]}
+```
+
+```{python}
+challenges_counter = Counter()
+for c in challenges_responses.values():
+    challenges_counter.update(c)
+```
+
+```{python}
+y_axis = list(challenges.values())
+
+x_axis = list(challenges_counter.values())
+
+sns.set(rc={'figure.figsize':(5,7)})
+
+sns.barplot( x=x_axis, 
+            y=y_axis , 
+           color = '#a60c37' )
+plt.show()
+```
+
+```{python}
+print(questions['Q14'])
+```
+
+```{python}
+print_responses('Q14')
+```
+
+### Summary
+
+- Not really
+
+- The library has a 'Copyright Information Point' which can advise on these matters. The university has a legal department, we work with them. legal & privacy officers available at university. sometimes really difficult to find solutions (e.g. what can we do with abstracts…?) The university has a Legal Office and a Data Protection Officer. We send them to the university's Legal Advisory Service. Contact with the University Data Protection Office around governance for data collection/storage. Jisc negotiate the majority of our license terms.
+
+- No personal data of users are collected in the statistics used for library intelligence purposes. Training is provided in relation to personal identifiers and the wider context of ethical issues when using data to produce statistics.
+
+- We give consideration to the rights and terms when we collect data. Ethical aspects are considered when we make bibliometric analyses. We act conforming to the German copyright law and also are aware of the CARE principles.
+
+- Ethical: no structured method, issues discussed as they become relevant
+
+The involvement in the Text+ consortium within the German National Research Data Infrastructure (NFDI) gives the German National Library (DNB) the opportunity to engage in finding ways to allow research on material protected by copyright, e.g. by provoding derived text formats, as this is a major issue in the work programme. Another milestone is an „Assessment of the impact of the Directive on Copyright in the Digital Single Market and its German transposition on the legal status of Collections“. The DNB is also involved in the NFDI wide section Ethical, Legal and Social Aspects (ELSA).
+
+## Funding
+
+```{python}
+print(questions['Q15'])
+```
+
+```{python}
+print_responses('Q15')
+```
+
+### Summary
+
+Three main sources of funding are mentioned:
+
+- Regular salaries (library budget)
+- University funding for projects
+- Involvement in externally funded research projects / grants provided by research projects / Funding by research councils (Ministry for Science of the federal state, EU, National Research Agency, German National Research Data Infrastructure (NFDI) framework, the German Research Foundation (DFG), Commissioner of the federal government for culture and media)
+
+## Ambitions
+
+```{python}
+print(questions['Q16'])
+```
+
+```{python}
+print_responses('Q16')
+```
+
+```{python}
+print(questions['Q17'])
+```
+
+```{python}
+print_responses('Q17')
+```
+
+A number of respondents had indicated that they may be contacted if we need further information. The mail addresses are in the survey results.
